@@ -7,7 +7,6 @@ import { getLatestProducts } from "@/lib/actions/product.actions";
 // };
 const HomePage = async () => {
   const latestProducts = await getLatestProducts();
-  console.log("latest products", latestProducts);
   return (
     <>
       <ProductList data={latestProducts} title="Newest Arrivals" limit={4} />

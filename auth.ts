@@ -59,18 +59,18 @@ export const config = {
   // We are gonna use the session callback which runs when the session is accessed
   // trigger is the reason why this callback ran, trigger may be sign in, or an update or whatever
   callbacks: {
-    async session({session, user, trigger, token}: any) {
+    async session({ session, user, trigger, token }: any) {
       // Set the user ID from the token
-      session.user.id = token.sub
+      session.user.id = token.sub;
 
       // If there is an update, set the user name
-      if(trigger === 'update') {
-        session.user.name = user.name
+      if (trigger === "update") {
+        session.user.name = user.name;
       }
-      return session
-    }
-  }
-} satisfies NextAuthConfig
+      return session;
+    },
+  },
+} satisfies NextAuthConfig;
 
 export const { handlers, auth, signIn, signOut } = NextAuth(config);
 

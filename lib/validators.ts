@@ -25,3 +25,10 @@ export const insertProductSchema = z.object({
 // REGEX demystified
 // ^ means start with
 // \d means digit \d+ means one or more digits
+
+// Schema for signing users in
+
+export const signInFormSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});

@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useActionState } from "react"; // useActionState is the changed form of useFormState from react 18
 import { useFormStatus } from "react-dom"; // used to show some status indicator to the user NOT MANDATORY but is nice to have from UX perspective
 import { signInWithCredentials } from "@/lib/actions/user.actions";
+import { useSearchParams } from "next/navigation";
 
 const CredentialsSignInForm = () => {
   // data is the state {success: , message
@@ -15,6 +16,9 @@ const CredentialsSignInForm = () => {
     success: false,
     message: "",
   });
+
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const SignInButton = () => {
     const { pending } = useFormStatus();
@@ -27,6 +31,7 @@ const CredentialsSignInForm = () => {
   };
   return (
     <form action={action}>
+      <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-6">
         <div>
           <Label htmlFor="email">Email</Label>

@@ -10,13 +10,20 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import CredentialsSignInForm from "./credentials-signin-form";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 // This is going to change the title of the sign in page to Sign In | Prostore
 export const metadata: Metadata = {
   title: "Sign In",
 };
 
-const SignInPage = () => {
+const SignInPage = async () => {
+  const session = await auth();
+  console.log("this is the session", session);
+  if (session) {
+    return redirect("/");
+  }
   return (
     <div className="w-full max-w-md mx-auto">
       <Card>
